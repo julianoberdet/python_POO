@@ -33,7 +33,3 @@ c1.depositar(float(input('Qual valor que quer depositar? ')))
 print('-' * 40)
 c1.sacar(float(input('Qual valor deseja sacar? ')))
 print(c1)
-
-
-
-
