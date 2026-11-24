@@ -1,32 +1,17 @@
 from rich import print
 from rich.panel import Panel
-class Funcionario:
-    """
-    =========================================================
-    Aqui vejo cadastro de pessoas, seus cargos e seus setores
-    =========================================================
-    """
-    empresa = "Curso em Vídeo"
-    def __init__(self, nome, setor, cargo):
+class Produto:
+    def __init__(self,nome, preco=0):
         self.nome = nome
-        self.setor = setor
-        self.cargo = cargo
-
-    def apresentacao(self) -> str:
-        return f":handshake: Olá, sou [blue]{self.nome}[/] se sou {self.cargo} do setor de {self.setor} na empresa {Funcionario.empresa}"
+        self.preco = preco
 
 
-    def __getstate__(self):
-        pessoa = Panel(f"[blue]Nome = {self.nome}\nSetor = {self.setor}\nCargo = {self.cargo}\nEmpresa = {Funcionario.empresa}[/]",width=49,style="green", title= "Cadastro de funcionário")
-        return pessoa
+    def etiqueta(self):
+        etiq = Panel(f"{self.nome.center(30)}\n{'-'*30} R${self.preco:.^28.2f}",title = "Produto",width=35)
+        print(etiq)
 
+c1 = Produto("Iphone Pro Max 17",23_000.89)
+c2 = Produto("Notebook Gamer",8_000)
 
-
-c1 = Funcionario("Maria","Administração","Diretora")
-print(Funcionario.__doc__)
-print(c1.apresentacao())
-
-c2 = Funcionario("Cláudio","Ti","Programador senior")
-print(c2.apresentacao())
-print(c1.__getstate__())
-print(c2.__getstate__())
+c1.etiqueta()
+c2.etiqueta()
