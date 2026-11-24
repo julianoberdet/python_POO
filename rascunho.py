@@ -1,52 +1,32 @@
-class ContaBancaria:
+from rich import print
+from rich.panel import Panel
+class Funcionario:
     """
-    =============================================================
-    Sistema para ver saldo da conta e realizar depósitos e saques
-    =============================================================
+    =========================================================
+    Aqui vejo cadastro de pessoas, seus cargos e seus setores
+    =========================================================
     """
-    def __init__(self,id, nome, saldo = 0):
-        self.id = id
-        self.titular = nome
-        self.saldo = saldo
+    empresa = "Curso em Vídeo"
+    def __init__(self, nome, setor, cargo):
+        self.nome = nome
+        self.setor = setor
+        self.cargo = cargo
+
+    def apresentacao(self) -> str:
+        return f":handshake: Olá, sou [blue]{self.nome}[/] se sou {self.cargo} do setor de {self.setor} na empresa {Funcionario.empresa}"
 
 
-    def __str__(self):
-        return f"A conta {self.id} do titular {self.titular} tem R${self.saldo:.2f} de saldo"
+    def __getstate__(self):
+        pessoa = Panel(f"[blue]Nome = {self.nome}\nSetor = {self.setor}\nCargo = {self.cargo}\nEmpresa = {Funcionario.empresa}[/]",width=49,style="green", title= "Cadastro de funcionário")
+        return pessoa
 
 
-    def depositar(self,valor):
-        self.saldo += valor
-        print(f"Depósito na conta {self.id} de R${valor:.2f}  realizado com sucesso")
 
+c1 = Funcionario("Maria","Administração","Diretora")
+print(Funcionario.__doc__)
+print(c1.apresentacao())
 
-    def sacar(self,valor):
-        if valor > self.saldo:
-            print(f"Saque NEGADO de R${valor:.2f}, SALDO INSUFICIENTE")
-        else:
-            print(f"Saque de R${valor:.2f} na conta {self.id} realizado com sucesso")
-            self.saldo -= valor
-
-
-c1 = ContaBancaria(112, "Juliano", 3000)
-print('=' * 30)
-print('BANCO FICTICIO'.center(30))
-print('=' * 30)
-while True:
-    print("""Escolha uma opção abaixo:
-[1] Ver saldo da conta
-[2] Depositar
-[3] Sacar
-[4] Sair
-""")
-    print('=' * 30)
-    opc = int(input('Qual opção? '))
-    if opc == 1:
-        print(c1)
-    if opc == 2:
-         c1.depositar(float(input('Qual valor deseja depositar? ')))
-    if opc == 3:
-        c1.sacar(float(input('Qual valor deseja sacar? ')))
-    if opc == 4:
-        print('Muito Obrigado! Volte sempre')
-        break
-    print('=' * 30)
+c2 = Funcionario("Cláudio","Ti","Programador senior")
+print(c2.apresentacao())
+print(c1.__getstate__())
+print(c2.__getstate__())
