@@ -1,29 +1,31 @@
 from rich import print
-from rich.panel import Panel
-class Churrasco:
-    def __init__(self,titulo,qtd):
-        self.qtd = qtd
+import time
+class Livro:
+    def __init__(self, titulo, paginas):
         self.titulo = titulo
+        self.total_paginas = paginas
+        self.pagina_atual = 1
+        print(f":open_book:[blue] Você acabou de abrir o livro '[red]{self.titulo}[/]'"
+               f" que tem [green]{self.total_paginas} páginas[/] no total."
+               f" Você agora está na [yellow]pagina {self.pagina_atual}[/][blue/]")
 
+    def analisar_paginas(self,qtd):
+        cont = 0
+        for c in range(0,qtd, 1):
+            if not self.fim_do_livro():
+                self.pagina_atual += 1
+                print(f"Pag {self.pagina_atual} :arrow_forward: ",end='')
+                time.sleep(0.3)
+                cont += 1
+        if self.fim_do_livro():
+            print(f":closed_book: [red]Você chegou ao final do livro '{self.titulo}'[/]")
+        print(f"[blue]Você agora avançou {cont} páginas está na [yellow]pagina {self.pagina_atual}[/][blue/]")
 
-    def __str__(self):
-        return f"No total são {self.qtd} pessoas"
+    def fim_do_livro(self):
+        return True if self.pagina_atual == self.total_paginas else False
 
-
-    def analisar(self):
-        precocarne = 82.40
-        pessoas_comem = 0.40
-        qtd_carne = pessoas_comem * self.qtd
-        pagamento_por_pessoa = (precocarne * qtd_carne) / self.qtd
-        custo_total = precocarne * qtd_carne
-        texto = f"Analisando o [green]{self.titulo}[/] com [blue]{self.qtd} convidados[/]"
-        texto += f"\nCada participante comerá {pessoas_comem:.2f}kg e cada kg custa R${precocarne:.2f}"
-        texto += f"\nRecomendo [blue]comprar {qtd_carne:.2f}Kg[/] de carne"
-        texto += f"\nO custo total será de [green]R${custo_total:.2f}[/]"
-        texto += f"\nCada pessoa pagará [yellow]R${pagamento_por_pessoa:.2f}[/] para participar"
-        com = Panel(texto,title=f"{self.titulo}",width=70)
-        print(com)
-
-
-c1 = Churrasco("Churras dos Amigos", 5)
-c1.analisar()
+l1 = Livro("10 coisas que aprendi",20)
+l1.analisar_paginas(5)
+l1.analisar_paginas(30)
+l1.analisar_paginas(12)
+l1.analisar_paginas(19)
