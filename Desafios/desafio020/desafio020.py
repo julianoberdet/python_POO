@@ -25,12 +25,19 @@ class Gamer:
         print(painel)
 
 
-j1 = Gamer("Fabricio da Silva","detonator2026")
-j1.add_favoritos("Mario Bros.")
-j1.add_favoritos("Sonic")
+j1 = Gamer("Juliano Berdet","Jberdet")
+j1.add_favoritos("Red Dead Redemption 2")
+j1.add_favoritos("Donkey kong 2")
+j1.add_favoritos("Age of Empires 3")
+j1.add_favoritos("Sim City 4")
+j1.add_favoritos("GTA Vice City")
+j1.add_favoritos("Tomb Raider 2")
+j1.add_favoritos("Resident Evil 3 (Nemesis)")
+j1.add_favoritos("Tony Hawk 4")
+j1.add_favoritos("The Last of Us 2")
 j1.add_favoritos("God of War")
-j1.add_favoritos("Fortnite")
-j1.add_favoritos("Among Us")
+j1.add_favoritos("Commandos 3")
+j1.add_favoritos("Super Mario World")
 print()
 
 print('-' * 40)
@@ -48,7 +55,7 @@ while True:
         if resp == 'N':
             break
     except KeyboardInterrupt:
-        print("[red]O usuário preferiu sair[/]")
+        print("\n:point_right:[blue] O usuário preferiu sair[/]")
         sys.exit()
 
 j1.ficha()
